@@ -1,10 +1,9 @@
-
 using Random
 
 player = 0
 enemy = 0
-playerhealth = 3
-enemyhealth = 3
+playerhealth = 0
+enemyhealth = 0
 
 function Turn()
     println("Choose your number\n1. Rock\n2. Paper\n3. Scissors")
@@ -20,23 +19,23 @@ function Checking(player, enemy)
 end
 
 function Win(playerhealth, enemyhealth)
-        (playerhealth == 0) && return "Win!"
-        (enemyhealth == 0) && return "Defeat!"
+        (playerhealth == 3) && return "Win!"
+        (playerhealth != 3) && return ""
+        (enemyhealth == 3) && return "Defeat!"
+        (enemyhealth != 3) && return ""
 end
     
-while playerhealth > 0 && enemyhealth >0
+while playerhealth < 3 && enemyhealth <3
             enemy = rand(1:3)
            player = Turn()
             player = parse(Int64, player)
 
             score = Checking(player, enemy)
         println("\n")
-            score <1 ? playerhealth= playerhealth-1 : ""
-            2>score >=1 ? enemyhealth = enemyhealth - 1 : ""
+            score <1 ? enemyhealth = enemyhealth + 1 : ""
+            2>score >=1 ? playerhealth= playerhealth+1 : ""
     
-            println("Your health ", playerhealth, "\nEnemy health ", enemyhealth, "\n")
+            println("Your points ", playerhealth, "\nEnemy points ", enemyhealth, "\n")
     
-            Win(playerhealth, enemyhealth)
+            println(Win(playerhealth, enemyhealth))
        end
-
-
